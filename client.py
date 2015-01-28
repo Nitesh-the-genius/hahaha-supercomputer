@@ -1,7 +1,9 @@
-import time # remove this later TODO
 import socket
+import tasks
 
 PORT = 2603
+LIM = 2048
+
 server = raw_input("Enter Server address: ")
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -9,7 +11,7 @@ s.connect((server,PORT))
 
 def main():
     while 1:
-        a = s.recv(2048)
+        a = s.recv(LIM)
         print "Recieved task. Processing task."
         r = process_task(a)
         print "Result is, ", r
@@ -17,8 +19,10 @@ def main():
         print "Asking for next task."
 
 def process_task(t):
-    exec t # Should define r
-    time.sleep(1)
+    t = int(t)
+    board = [[0,0,0],[0,0,0],[0,0,0]]
+    board[t/3][t%3] = 1
+    r = tasks.minimax(board)
     return r
 
 main()
