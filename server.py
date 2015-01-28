@@ -1,22 +1,22 @@
 import socket
-#import threading
 
 PORT = 2603
 
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serversocket.bind(('', PORT))
 
-print socket.gethostname()
-
 def main():
 	serversocket.listen(5)
+	(clientsocket, address) = serversocket.accept()
 	while 1:
-		(clientsocket, address) = serversocket.accept()
 		provide_task(clientsocket)
-		clientsocket.close()
+	clientsocket.close()
 
 def provide_task(s):
-	a = s.recv(2048)
-	print a
+	print "Recieved connection. Sending task."
+	task = "r=1+1\n" # Must define r and end with 1010011010
+	print s.send(task)
+	result = s.recv(2048)
+	print "Recieved result. Result is, " , result
 
 main()
