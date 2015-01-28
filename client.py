@@ -21,7 +21,7 @@ def main():
 def process_task(t):
     t = int(t)
     board = [[0,0,0],[0,0,0],[0,0,0]]
-    board[t/3][t%3] = 1
+    board[(t-1)/3][(t-1)%3] = 1
     r = tasks.minimax(board)
     return r
 

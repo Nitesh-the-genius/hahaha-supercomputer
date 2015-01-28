@@ -26,19 +26,22 @@ def worker(i):
     print "Recieved Connection from, %s." % str(address)
     e = False
     while not e:
-        e = provide_task(clientsocket,i)
+        e = provide_task(clientsocket,i+1)
     clientsocket.close()
 
 def provide_task(s,i):
-    print "Sending task."
-    task = "%d"%(i)
+    print "Sending task to client %d." % i
+    task = produce_task(i)
     try:
         s.send(task)
         result = s.recv(LIM)
         print "Recieved result. Result is, " , result
         return 0
     except:
-        print "Connection Closed by client. <>"
+        print "Connection Closed by client %d." % i
         return 1
+
+def produce_task(i):
+    return "%d"%(i)
 
 main()
