@@ -1,3 +1,4 @@
+import time # remove this later TODO
 import socket
 
 PORT = 2603
@@ -17,6 +18,7 @@ def main():
 
 def process_task(t):
     exec t # Should define r
+    time.sleep(1)
     return r
 
 main()
