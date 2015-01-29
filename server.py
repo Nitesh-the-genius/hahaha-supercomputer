@@ -9,7 +9,7 @@ serversocket.bind(('', PORT))
 
 def main():
     print ""
-    print "Started Running srever on this machine."
+    print "Started Running server on this machine."
     print "Waiting for connections"
     print "Run \"ipconfig\" in cmd to get server IP."
     print "Type Ctrl-Break to end server."
